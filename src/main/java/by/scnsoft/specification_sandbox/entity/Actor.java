@@ -7,7 +7,7 @@ import java.util.List;
 
 @Entity(name = "t_actor")
 @Data
-public class Actor {
+public class Actor implements RawEntity {
 
     @Id
     @Column(name = "id")
@@ -16,6 +16,11 @@ public class Actor {
     @Column(name = "c_name")
     private String name;
 
-    @ManyToMany(mappedBy = "actors")
+    @ManyToMany
+    @JoinTable(
+            name = "t_films_actors",
+            joinColumns = {@JoinColumn(name = "id_film")},
+            inverseJoinColumns = {@JoinColumn(name = "id_actor")}
+    )
     private List<Film> films;
 }

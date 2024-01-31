@@ -1,8 +1,13 @@
--- create schema sandbox if  not exists;
+-- drop schema if exists sandbox;
+-- create schema sandbox not exists;
 use
 sandbox;
 
+DROP TABLE IF EXISTS t_films_actors;
 DROP TABLE IF EXISTS t_film;
+DROP TABLE IF EXISTS t_actor;
+DROP TABLE IF EXISTS t_director;
+
 create table t_film
 (
     id            int NOT NULL AUTO_INCREMENT,
@@ -12,7 +17,6 @@ create table t_film
     PRIMARY KEY (id)
 );
 
-DROP TABLE IF EXISTS t_director;
 create table t_director
 (
     id     int NOT NULL AUTO_INCREMENT,
@@ -20,7 +24,6 @@ create table t_director
     PRIMARY KEY (id)
 );
 
-DROP TABLE IF EXISTS t_actor;
 create table t_actor
 (
     id     int NOT NULL AUTO_INCREMENT,
@@ -28,10 +31,11 @@ create table t_actor
     PRIMARY KEY (id)
 );
 
-DROP TABLE IF EXISTS t_film_actor;
-create table t_film_actor
+create table t_films_actors
 (
-    id_film  int references t_film,
-    id_actor int references t_actor,
-    PRIMARY KEY (id_film, id_actor)
+    id_film  int,
+    id_actor int,
+    PRIMARY KEY (id_film, id_actor),
+    FOREIGN KEY (id_film) REFERENCES t_film (id),
+    FOREIGN KEY (id_actor) REFERENCES t_actor (id)
 );

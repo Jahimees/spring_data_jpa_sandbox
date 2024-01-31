@@ -1,9 +1,9 @@
-package by.scnsoft.specification_sandbox.dto;
+package by.scnsoft.specification_sandbox.entity.dto;
 
 import by.scnsoft.specification_sandbox.entity.Film;
-import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.List;
 
@@ -11,27 +11,20 @@ import java.util.List;
  * DTO-проекция. Для того, чтобы работало, нужно, чтобы свойства entity и dto объекта совпадали, чтобы
  * в Repository можно было сделать так: ... extends JpaRepository<Actor, Integer>, но при этом в методах
  * List<ActorDto> findAllBy...
+ * Не работает вложенная проекция!!! ДАННАЯ РЕАЛИЗАЦИЯ НЕ СРАБОТАЕТ!
  */
 @Getter
+@Setter
 @EqualsAndHashCode
-public class ActorDto {
+public class ActorDto implements DtoEntity {
 
     private String name;
-//    private List<Film> films;
+    private List<FilmDto> films;
 
-    public ActorDto(String name) {
+    public ActorDto(String name, List<Film> films) {
         this.name = name;
-//        this.films = List.copyOf(films);
-//        var iterator = films.iterator();
-//
-//        var filmBuilder = new StringBuilder();
-//        while (iterator.hasNext()) {
-//            filmBuilder.append(iterator.next().toString());
-//            if (iterator.hasNext()) {
-//                filmBuilder.append(", ");
-//            }
-//        }
-//
-//        this.films = filmBuilder.toString();
+        this.films = films.stream().map(film -> {
+            return new FilmDto(film.getTitle(), film.getDescription(), film.getDirector());
+        }).toList();
     }
 }

@@ -17,7 +17,7 @@ values ('Побег из шоушенка', 'Побежали', 1),
        ('Брюс всемогущий', 'Может всё', 1),
        ('Титаник', 'Утонул :(', 1);
 
-insert into t_film_actor(id_actor, id_film)
+insert into t_films_actors(id_actor, id_film)
 values (1, 1),
        (2, 2),
        (3, 2),

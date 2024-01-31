@@ -7,7 +7,7 @@ import lombok.Data;
 
 @Entity(name = "t_director")
 @Data
-public class Director {
+public class Director implements RawEntity {
 
     @Id
     @Column(name = "id")

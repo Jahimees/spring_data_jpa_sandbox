@@ -7,7 +7,7 @@ import java.util.List;
 
 @Data
 @Entity(name = "t_film")
-public class Film {
+public class Film implements RawEntity {
 
     @Id
     @Column(name = "id")
@@ -24,6 +24,6 @@ public class Film {
     @JoinColumn(name = "id_director")
     private Director director;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "films")
     private List<Actor> actors;
 }
