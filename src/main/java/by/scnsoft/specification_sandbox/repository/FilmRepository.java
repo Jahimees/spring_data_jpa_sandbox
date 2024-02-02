@@ -3,12 +3,13 @@ package by.scnsoft.specification_sandbox.repository;
 import by.scnsoft.specification_sandbox.entity.dto.FilmDto;
 import by.scnsoft.specification_sandbox.entity.Film;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-public interface FilmRepository extends JpaRepository<Film, Integer> {
+public interface FilmRepository extends JpaRepository<Film, Integer>, JpaSpecificationExecutor<Film> {
 
     List<FilmDto> findAllDtosBy();
 }

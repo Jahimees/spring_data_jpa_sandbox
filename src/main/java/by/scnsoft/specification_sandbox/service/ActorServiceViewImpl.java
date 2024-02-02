@@ -18,5 +18,6 @@ public class ActorServiceViewImpl implements ViewFindAllService<ActorView> {
     public List<ActorView> findAll() {
         return this.actorRepository.findAllViewsBy();
     }
+
 }
 
